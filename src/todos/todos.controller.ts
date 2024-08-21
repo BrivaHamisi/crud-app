@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Put } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -25,9 +25,15 @@ export class TodosController {
     return result;
   }
 
-  @Patch(':id')
-  async update(@Param('id') id: number, @Body() updateTodoDto: UpdateTodoDto):Promise<Todo> {
-     return await this.todosService.update(id, updateTodoDto)
+  // @Patch(':id')
+  // async update(@Param('id') id: number, @Body() updateTodoDto: UpdateTodoDto):Promise<Todo> {
+  //    return await this.todosService.update(id, updateTodoDto)
+  // }
+
+  //Updated Todo Controller method
+  @Put('id')
+  async update(@Param('id') id: number, @Body() updateTodoDto: UpdateTodoDto) {
+    return this.todosService.update(id, updateTodoDto)
   }
 
 
